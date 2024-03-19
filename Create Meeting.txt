@@ -1,0 +1,18 @@
+eventNo = zoho.crm.getRecordById("Leads",lead_id);
+Last_Name = eventNo.get("Last_Name");
+info Last_Name;
+crmEventFieldMap = Map();
+crmEventFieldMap.put("Subject","Appointment Reminder for " + Last_Name);
+crmEventFieldMap.put("What_Id",lead_id);
+crmEventFieldMap.put("$se_module","Leads");
+crmEventFieldMap.put("Event_Title","Event with " + Last_Name);
+crmEventFieldMap.put("Description","Evebt for Appointment");
+current_date = zoho.currenttime;
+info current_date;
+end_date = current_date.addDay(7);
+info end_date;
+crmEventFieldMap.put("Start_DateTime",current_date.toString("yyyy-MM-dd'T'HH:mm:ss'+00:00'"));
+crmEventFieldMap.put("End_DateTime",end_date.toString("yyyy-MM-dd'T'HH:mm:ss'+00:00'"));
+response = zoho.crm.createRecord("Events",crmEventFieldMap);
+info response;
+info crmEventFieldMap;
